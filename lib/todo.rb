@@ -1,6 +1,7 @@
 require 'csv'
 
 class Todo
+  attr_accessor :todos
 
   def initialize(file_name)
     @file_name = file_name #Don't touch this line or var
@@ -41,9 +42,17 @@ class Todo
   end
 
   def add_todo
+    print "Name of Todo > "
+    line_name = get_input
+    @todos << [line_name, "no"]
   end
 
   def mark_todo
+    print "Which todo have you finished?"
+    mark_input = get_input.to_i
+    @todos[mark_input-1][1] = "yes"
+    # require 'pry';binding.pry
+
   end
 
   def todos
