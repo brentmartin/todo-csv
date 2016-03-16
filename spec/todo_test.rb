@@ -67,6 +67,7 @@ class TodoTest < MiniTest::Test
    assert_equal("finish homework,yes\n", @todo.todos[0].to_s, "The first todo in todos was not 'finish homework'")
   end
 
+
   def test_edit_todo
    todo_setup
    $input.push('4')

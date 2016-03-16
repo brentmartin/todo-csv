@@ -21,7 +21,7 @@ class Todo
       puts "What would you like to do?"
       puts "1) Exit 2) Add Todo 3) Mark Todo As Complete 4) Edit Todo 5) Delete Todo"
       print " > "
-      action = gets.chomp.to_i
+      action = get_input.to_i
       case action
       when 1 then exit
       when 2 then add_todo
@@ -37,10 +37,23 @@ class Todo
 
   def view_todos
     puts "Unfinished"
+    num_index = 1
+
     @todos.each_with_index do |todo, index|
-      puts "#{index + 1}) #{todo["name"]}"
+      if todo["completed"] == "no"
+        puts "#{num_index}) #{todo["name"]}"
+        num_index += 1
+      end
     end
+    num_index = 1
     puts "Completed"
+    @todos.each_with_index do |todo, index|
+      if todo["completed"] == "yes"
+        puts "#{num_index}) #{todo["name"]}"
+        num_index += 1
+      end
+    end
+
   end
 
   def add_todo
@@ -52,8 +65,16 @@ class Todo
   def mark_todo
     print "Which todo have you finished?"
     mark_input = get_input.to_i
-    @todos[mark_input-1][1] = "yes"
+    @todos[mark_num(mark_input-1)][1] = "yes"
     # require 'pry';binding.pry
+  end
+
+  def mark_num(num)
+    count = 0
+    num.times do |i|
+      count += 1 if @todos[i][1] == "yes"
+    end
+    count+num
   end
 
   def edit_todo
