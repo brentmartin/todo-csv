@@ -91,7 +91,7 @@ class Todo
     puts "Which todo would you like to delete?"
     print "> "
     delete_input = get_input.to_i
-    @todos.delete(delete_input-1)
+    @todos.delete(mark_num(delete_input-1))
   end
 
   def todos
